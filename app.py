@@ -1,33 +1,28 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import joblib
+import pickle
 
-# Load models and scalers
 scalers = {
-    'StandardScaler': joblib.load('StandardScaler.pkl'),
-    'MinMaxScaler': joblib.load('MinMaxScaler.pkl'),
-    'RobustScaler': joblib.load('RobustScaler.pkl')
+    'StandardScaler': pickle.load(open('StandardScaler.pkl', 'rb')),
+    'MinMaxScaler': pickle.load(open('MinMaxScaler.pkl', 'rb')),
+    'RobustScaler': pickle.load(open('RobustScaler.pkl', 'rb'))
 }
 
 models = {
-    'LinearRegression': joblib.load('LinearRegression_StandardScaler.pkl'),
-    'Ridge': joblib.load('Ridge_StandardScaler.pkl'),
-    'Lasso': joblib.load('Lasso_StandardScaler.pkl'),
-    'DecisionTreeRegressor': joblib.load('DecisionTreeRegressor_StandardScaler.pkl'),
-    'RandomForestRegressor': joblib.load('RandomForestRegressor_StandardScaler.pkl'),
-    'GradientBoostingRegressor': joblib.load('GradientBoostingRegressor_StandardScaler.pkl'),
-    'SVR': joblib.load('SVR_StandardScaler.pkl')
+    'LinearRegression': pickle.load(open('LinearRegression_StandardScaler.pkl', 'rb')),
+    'Ridge': pickle.load(open('Ridge_StandardScaler.pkl', 'rb')),
+    'Lasso': pickle.load(open('Lasso_StandardScaler.pkl', 'rb')),
+    'DecisionTreeRegressor': pickle.load(open('DecisionTreeRegressor_StandardScaler.pkl', 'rb')),
+    'RandomForestRegressor': pickle.load(open('RandomForestRegressor_StandardScaler.pkl', 'rb')),
+    'GradientBoostingRegressor': pickle.load(open('GradientBoostingRegressor_StandardScaler.pkl', 'rb')),
+    'SVR': pickle.load(open('SVR_StandardScaler.pkl', 'rb'))
 }
 
-# Set page config
 st.set_page_config(page_title='Boston Housing Price Predictor', layout='wide')
 
-# Title
 st.title('Boston Housing Price Predictor')
 st.write("Choose a scaler and a model to see the results. You can also input your own data for prediction.")
 
-# Sidebar for scaler and model selection
 st.sidebar.header('Model and Scaler Selection')
 scaler_choice = st.sidebar.selectbox('Scaler', list(scalers.keys()))
 model_choice = st.sidebar.selectbox('Model', list(models.keys()))
