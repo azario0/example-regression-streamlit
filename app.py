@@ -14,7 +14,6 @@ models = {
     'Lasso': pickle.load(open('Lasso_StandardScaler.pkl', 'rb')),
     'DecisionTreeRegressor': pickle.load(open('DecisionTreeRegressor_StandardScaler.pkl', 'rb')),
     'RandomForestRegressor': pickle.load(open('RandomForestRegressor_StandardScaler.pkl', 'rb')),
-    'GradientBoostingRegressor': pickle.load(open('GradientBoostingRegressor_StandardScaler.pkl', 'rb')),
     'SVR': pickle.load(open('SVR_StandardScaler.pkl', 'rb'))
 }
 
