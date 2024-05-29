@@ -14,6 +14,7 @@ models = {
     'Lasso': pickle.load(open('Lasso_StandardScaler.pkl', 'rb')),
     'DecisionTreeRegressor': pickle.load(open('DecisionTreeRegressor_StandardScaler.pkl', 'rb')),
     'RandomForestRegressor': pickle.load(open('RandomForestRegressor_StandardScaler.pkl', 'rb')),
+    # 'GradientBoostingRegressor': pickle.load(open('GradientBoostingRegressor_StandardScaler.pkl', 'rb')),
     'SVR': pickle.load(open('SVR_StandardScaler.pkl', 'rb'))
 }
 
@@ -25,8 +26,6 @@ st.write("Choose a scaler and a model to see the results. You can also input you
 st.sidebar.header('Model and Scaler Selection')
 scaler_choice = st.sidebar.selectbox('Scaler', list(scalers.keys()))
 model_choice = st.sidebar.selectbox('Model', list(models.keys()))
-
-# Sidebar for user input
 st.sidebar.header('User Input Features')
 def user_input_features():
     CRIM = st.sidebar.number_input('Per capita crime rate by town (CRIM)', value=0.00632)
@@ -60,29 +59,17 @@ def user_input_features():
     }
     features = pd.DataFrame(data, index=[0])
     return features
-
-# Main page for displaying results
 st.header('Prediction Input and Results')
-
-# Get user inputs
 input_df = user_input_features()
-
-# Add a predict button
 if st.button('Predict'):
-    # Scale the input features
     scaler = scalers[scaler_choice]
     input_scaled = scaler.transform(input_df)
-
-    # Load the chosen model and make predictions
     model = models[model_choice]
     prediction = model.predict(input_scaled)
-
     st.subheader('Prediction Results')
     st.write(f'Model used: **{model_choice}**')
     st.write(f'Scaler used: **{scaler_choice}**')
-    st.write(f'MEDV (Median value of owner-occupied homes in dollars): **${prediction[0]:.2f}**')
-
-# Layout and styling
+    st.write(f'MEDV (Median value of owner-occupied homes in k dollars ): ** {prediction[0]:.2f} k dollars')
 st.markdown(
     """
     <style>
